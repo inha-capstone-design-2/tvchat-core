@@ -21,11 +21,19 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
+
+    @Column(name = "member_email")
     private String email;
+
+    @Column(name = "member_password")
     private String password;
+
+    @Column(name = "member_nickname")
     private String nickname;
+
     @Enumerated(EnumType.STRING)
     private Authority authority;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Bookmark> bookmarkList = new ArrayList<>();
 
