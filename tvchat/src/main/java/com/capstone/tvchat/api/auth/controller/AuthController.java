@@ -3,9 +3,11 @@ package com.capstone.tvchat.api.auth.controller;
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
 import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
 import com.capstone.tvchat.api.auth.service.AuthService.AuthService;
+import com.capstone.tvchat.common.BaseEntity.JsonResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
