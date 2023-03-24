@@ -1,13 +1,11 @@
 package com.capstone.tvchat.api.program.domain.entity;
 
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
-import com.capstone.tvchat.common.BaseEntity.BaseEntity;
-import com.fasterxml.jackson.databind.ser.Serializers;
+import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 

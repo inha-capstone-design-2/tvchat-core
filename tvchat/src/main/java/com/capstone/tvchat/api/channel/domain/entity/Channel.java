@@ -1,7 +1,7 @@
 package com.capstone.tvchat.api.channel.domain.entity;
 
 import com.capstone.tvchat.api.program.domain.entity.Program;
-import com.capstone.tvchat.common.BaseEntity.BaseEntity;
+import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
