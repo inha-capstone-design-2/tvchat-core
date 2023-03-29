@@ -1,7 +1,7 @@
 package com.capstone.tvchat.api.member.domain.entity;
 
 import com.capstone.tvchat.api.bookmark.domain.entity.Bookmark;
-import com.capstone.tvchat.api.member.domain.entity.enumerate.Authority;
+import com.capstone.tvchat.api.member.domain.enumerate.Authority;
 import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;

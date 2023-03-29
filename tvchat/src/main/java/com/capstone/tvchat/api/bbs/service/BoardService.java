@@ -1,15 +1,13 @@
 package com.capstone.tvchat.api.bbs.service;
 
-import com.capstone.tvchat.api.bbs.domain.dto.BoardCreateRequest;
-import com.capstone.tvchat.api.bbs.domain.dto.BoardResponse;
+import com.capstone.tvchat.api.bbs.domain.dto.request.BoardCreateRequest;
+import com.capstone.tvchat.api.bbs.domain.dto.response.BoardResponse;
 import com.capstone.tvchat.api.bbs.domain.enums.ProgramErrorCode;
-import com.capstone.tvchat.api.bbs.repository.ArticleRepository;
 import com.capstone.tvchat.api.bbs.repository.BoardRepository;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

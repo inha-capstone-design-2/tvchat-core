@@ -1,6 +1,6 @@
 package com.capstone.tvchat.api.bbs.service;
 
-import com.capstone.tvchat.api.bbs.domain.dto.BoardResponse;
+import com.capstone.tvchat.api.bbs.domain.dto.response.BoardResponse;
 import com.capstone.tvchat.api.bbs.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

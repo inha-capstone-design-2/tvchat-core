@@ -1,11 +1,9 @@
 package com.capstone.tvchat.api.program.service;
 
-import com.capstone.tvchat.api.channel.domain.dto.response.ChannelResponse;
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
 import com.capstone.tvchat.api.channel.domain.enums.ChannelErrorCode;
 import com.capstone.tvchat.api.channel.repository.ChannelRepository;
 import com.capstone.tvchat.api.program.domain.dto.response.ProgramResponse;
-import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
@@ -40,4 +38,6 @@ public class ProgramService {
                 .map(ProgramResponse::toResponse)
                 .collect(Collectors.toList());
     }
+
+
 }

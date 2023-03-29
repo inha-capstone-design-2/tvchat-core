@@ -1,6 +1,6 @@
 package com.capstone.tvchat.api.bbs.controller;
 
-import com.capstone.tvchat.api.bbs.domain.dto.BoardCreateRequest;
+import com.capstone.tvchat.api.bbs.domain.dto.request.BoardCreateRequest;
 import com.capstone.tvchat.api.bbs.service.BoardService;
 import com.capstone.tvchat.common.domain.JsonResultData;
 import io.swagger.annotations.Api;

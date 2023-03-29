@@ -1,10 +1,9 @@
-package com.capstone.tvchat.api.bbs.domain.dto;
+package com.capstone.tvchat.api.bbs.domain.dto.request;
 
 import com.capstone.tvchat.api.bbs.domain.entity.Board;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data

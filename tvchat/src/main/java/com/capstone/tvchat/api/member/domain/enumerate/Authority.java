@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.member.domain.entity.enumerate;
+package com.capstone.tvchat.api.member.domain.enumerate;
 
 public enum Authority {
     ROLE_USER,

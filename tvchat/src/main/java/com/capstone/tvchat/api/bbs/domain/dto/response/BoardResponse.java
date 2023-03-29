@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.bbs.domain.dto;
+package com.capstone.tvchat.api.bbs.domain.dto.response;
 
 import com.capstone.tvchat.api.bbs.domain.entity.Board;
 import lombok.Builder;
