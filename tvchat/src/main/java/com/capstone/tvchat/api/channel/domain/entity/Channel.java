@@ -21,8 +21,7 @@ public class Channel extends BaseEntity {
     @Column(name = "channel_name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "program_id")
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL)
     private List<Program> programList;
 
     @Builder
