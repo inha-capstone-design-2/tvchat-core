@@ -32,4 +32,9 @@ public class Program extends BaseEntity {
         this.title = title;
         this.channel = channel;
     }
+
+    public void modifyProgram(String title, Channel channel) {
+        this.title = title;
+        this.channel = channel;
+    }
 }
