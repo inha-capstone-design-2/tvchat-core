@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class ChannelResponse {
     private Long channelId;
     private String channelName;
-
     private LocalDateTime createdTime;
     private String createdBy;
     private LocalDateTime updatedTime;

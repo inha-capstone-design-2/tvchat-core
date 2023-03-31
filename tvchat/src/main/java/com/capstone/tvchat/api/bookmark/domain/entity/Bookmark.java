@@ -2,6 +2,7 @@ package com.capstone.tvchat.api.bookmark.domain.entity;
 
 import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.api.program.domain.entity.Program;
+import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Table(name = "BOOKMARK")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Bookmark {
+public class Bookmark extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bookmark_id")
