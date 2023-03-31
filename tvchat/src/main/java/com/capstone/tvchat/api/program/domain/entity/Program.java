@@ -1,13 +1,11 @@
 package com.capstone.tvchat.api.program.domain.entity;
 
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
-import com.capstone.tvchat.common.BaseEntity.BaseEntity;
-import com.fasterxml.jackson.databind.ser.Serializers;
+import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -31,6 +29,11 @@ public class Program extends BaseEntity {
     @Builder
     public Program(Long id, String title, Channel channel) {
         this.id = id;
+        this.title = title;
+        this.channel = channel;
+    }
+
+    public void modifyProgram(String title, Channel channel) {
         this.title = title;
         this.channel = channel;
     }
