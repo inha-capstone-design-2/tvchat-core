@@ -1,6 +1,7 @@
 package com.capstone.tvchat.api.channel.controller;
 
 import com.capstone.tvchat.api.channel.domain.dto.ChannelSearchRequest;
+import com.capstone.tvchat.api.channel.domain.dto.request.ChannelCreateRequest;
 import com.capstone.tvchat.api.channel.service.ChannelService;
 import com.capstone.tvchat.common.BaseEntity.JsonResultData;
 import io.swagger.annotations.Api;
@@ -8,11 +9,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.query.Jpa21Utils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.json.Json;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +30,15 @@ public class ChannelController {
                         .data(channelService.getChannels())
                         .build()
         );
+    }
+
+    @ApiOperation(value = "채널 등록 API")
+    @PostMapping("/")
+    public ResponseEntity<?> createChannel(@RequestBody ChannelCreateRequest channelCreateRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(JsonResultData.successResultBuilder()
+                        .data(channelService.createChannel(channelCreateRequest))
+                        .build()
+                );
     }
 }
