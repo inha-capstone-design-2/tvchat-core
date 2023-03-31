@@ -1,18 +1,15 @@
 package com.capstone.tvchat.api.channel.controller;
 
-import com.capstone.tvchat.api.channel.domain.dto.ChannelSearchRequest;
 import com.capstone.tvchat.api.channel.domain.dto.request.ChannelCreateRequest;
+import com.capstone.tvchat.api.channel.domain.dto.request.ModifyChannelRequest;
 import com.capstone.tvchat.api.channel.service.ChannelService;
-import com.capstone.tvchat.common.BaseEntity.JsonResultData;
+import com.capstone.tvchat.common.domain.JsonResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.query.Jpa21Utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.spring.web.json.Json;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,5 +37,26 @@ public class ChannelController {
                         .data(channelService.createChannel(channelCreateRequest))
                         .build()
                 );
+    }
+
+    @ApiOperation(value = "채널 삭제 API")
+    @DeleteMapping("/{channel-id}")
+    public ResponseEntity<?> deleteChannel(@RequestParam(name = "channel-id")Long channelId) {
+        channelService.deleteChannel(channelId);
+        return ResponseEntity.ok(
+                JsonResultData.successResultBuilder()
+                        .data(null)
+                        .build()
+        );
+    }
+
+    @ApiOperation(value = "채널 수정 API")
+    @PatchMapping("/{channel-id}")
+    public ResponseEntity<?> modifyChannel(@RequestParam(name = "channel-id")Long channelId, ModifyChannelRequest modifyChannelRequest) {
+        return ResponseEntity.ok(
+                JsonResultData.successResultBuilder()
+                        .data(channelService.modifyChannel(channelId, modifyChannelRequest))
+                        .build()
+        );
     }
 }

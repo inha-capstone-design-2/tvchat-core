@@ -1,5 +1,6 @@
 package com.capstone.tvchat.api.channel.domain.entity;
 
+import com.capstone.tvchat.api.channel.domain.dto.request.ModifyChannelRequest;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.Builder;
@@ -28,5 +29,9 @@ public class Channel extends BaseEntity {
     public Channel(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public void modifyChannel(ModifyChannelRequest modifyChannelRequest) {
+        this.name = modifyChannelRequest.getChannelName();
     }
 }
