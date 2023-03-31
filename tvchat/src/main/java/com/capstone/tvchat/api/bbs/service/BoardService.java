@@ -2,7 +2,7 @@ package com.capstone.tvchat.api.bbs.service;
 
 import com.capstone.tvchat.api.bbs.domain.dto.request.BoardCreateRequest;
 import com.capstone.tvchat.api.bbs.domain.dto.response.BoardResponse;
-import com.capstone.tvchat.api.bbs.domain.enums.ProgramErrorCode;
+import com.capstone.tvchat.api.program.domain.enums.ProgramErrorCode;
 import com.capstone.tvchat.api.bbs.repository.BoardRepository;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
