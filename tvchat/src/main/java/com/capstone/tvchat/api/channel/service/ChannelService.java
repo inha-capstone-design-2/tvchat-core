@@ -1,6 +1,6 @@
 package com.capstone.tvchat.api.channel.service;
 
-import com.capstone.tvchat.api.channel.domain.dto.request.ChannelCreateRequest;
+import com.capstone.tvchat.api.channel.domain.dto.request.CreateChannelRequest;
 import com.capstone.tvchat.api.channel.domain.dto.request.ModifyChannelRequest;
 import com.capstone.tvchat.api.channel.domain.dto.response.ChannelResponse;
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
@@ -27,9 +27,9 @@ public class ChannelService {
                 .collect(Collectors.toList());
     }
 
-    public Long createChannel(ChannelCreateRequest channelCreateRequest) {
+    public Long createChannel(CreateChannelRequest createChannelRequest) {
         return channelRepository.save(
-                ChannelCreateRequest.toEntity(channelCreateRequest))
+                CreateChannelRequest.toEntity(createChannelRequest))
                 .getId();
     }
 

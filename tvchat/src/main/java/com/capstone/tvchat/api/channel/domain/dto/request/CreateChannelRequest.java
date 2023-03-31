@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ChannelCreateRequest {
+public class CreateChannelRequest {
     private String channelName;
 
-    public static Channel toEntity(ChannelCreateRequest channelCreateRequest) {
+    public static Channel toEntity(CreateChannelRequest createChannelRequest) {
         return Channel.builder()
-                .name(channelCreateRequest.getChannelName())
+                .name(createChannelRequest.getChannelName())
                 .build();
     }
 }

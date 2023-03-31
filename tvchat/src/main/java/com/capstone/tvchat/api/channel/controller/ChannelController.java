@@ -1,6 +1,6 @@
 package com.capstone.tvchat.api.channel.controller;
 
-import com.capstone.tvchat.api.channel.domain.dto.request.ChannelCreateRequest;
+import com.capstone.tvchat.api.channel.domain.dto.request.CreateChannelRequest;
 import com.capstone.tvchat.api.channel.domain.dto.request.ModifyChannelRequest;
 import com.capstone.tvchat.api.channel.service.ChannelService;
 import com.capstone.tvchat.common.domain.JsonResultData;
@@ -31,10 +31,10 @@ public class ChannelController {
 
     @ApiOperation(value = "채널 등록 API")
     @PostMapping("/")
-    public ResponseEntity<?> createChannel(@RequestBody ChannelCreateRequest channelCreateRequest) {
+    public ResponseEntity<?> createChannel(@RequestBody CreateChannelRequest createChannelRequest) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(JsonResultData.successResultBuilder()
-                        .data(channelService.createChannel(channelCreateRequest))
+                        .data(channelService.createChannel(createChannelRequest))
                         .build()
                 );
     }
