@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Api("게시글 기능 API")
 @RequiredArgsConstructor
-@RequestMapping("/api/article")
+@RequestMapping("/api/bbs/article")
 public class ArticleController {
 
     private final ArticleService articleService;
