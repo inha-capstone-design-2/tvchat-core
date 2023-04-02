@@ -2,7 +2,6 @@ package com.capstone.tvchat.api.bbs.domain.dto.request;
 
 import com.capstone.tvchat.api.bbs.domain.entity.Board;
 import com.capstone.tvchat.api.program.domain.entity.Program;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,19 +12,14 @@ public class BoardCreateRequest {
     private String boardName;
     private Long programId;
     private String imagePath;
-
-    @Builder
-    public BoardCreateRequest(Long boardId, String boardName, Long programId) {
-        this.boardId = boardId;
-        this.boardName = boardName;
-        this.programId = programId;
-    }
+    private String description;
 
     public static Board createBoard(BoardCreateRequest boardCreateRequest, Program program) {
         return Board.builder()
                 .name(boardCreateRequest.getBoardName())
                 .program(program)
                 .imagePath(boardCreateRequest.getImagePath())
+                .description(boardCreateRequest.getDescription())
                 .build();
     }
 }

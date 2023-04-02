@@ -1,6 +1,7 @@
 package com.capstone.tvchat.api.bbs.controller;
 
 import com.capstone.tvchat.api.bbs.domain.dto.request.BoardCreateRequest;
+import com.capstone.tvchat.api.bbs.domain.dto.request.ModifyBoardRequest;
 import com.capstone.tvchat.api.bbs.service.BoardService;
 import com.capstone.tvchat.common.domain.JsonResultData;
 import io.swagger.annotations.Api;
@@ -46,6 +47,17 @@ public class BoardController {
         return ResponseEntity.ok(
                 JsonResultData.successResultBuilder()
                         .data(null)
+                        .build()
+        );
+    }
+
+    @ApiOperation("게시판 수정 API")
+    @PatchMapping("/{board-id}")
+    public ResponseEntity<?> modifyBoard(@RequestParam(name = "board-id")Long boardId,
+                                         @RequestBody ModifyBoardRequest modifyBoardRequest) {
+        return ResponseEntity.ok(
+                JsonResultData.successResultBuilder()
+                        .data(boardService.modifyBoard(boardId, modifyBoardRequest))
                         .build()
         );
     }
