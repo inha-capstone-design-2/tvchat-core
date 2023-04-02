@@ -44,4 +44,8 @@ public class BoardService {
                 .map(BoardResponse::toResponse)
                 .collect(Collectors.toList());
     }
+
+    public void deleteBoard(Long boardId) {
+        boardRepository.deleteById(boardId);
+    }
 }
