@@ -5,7 +5,9 @@ import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
 import com.capstone.tvchat.api.auth.service.AuthService.AuthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.Base64;
 @RestController
 @RequestMapping("/api/auth")
 @Api("Auth API")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final String BASIC_PREFIX = "Basic ";
@@ -38,7 +41,7 @@ public class AuthController {
             memberSignupDto.setEmail(email);
             memberSignupDto.setPassword(password);
 
-            MemberResponseDto memberResponseDto = authService.signup(memberJoinDto);
+            MemberResponseDto memberResponseDto = authService.signup(memberSignupDto);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(JsonResultData.successResultBuilder()
                             .data(memberResponseDto)

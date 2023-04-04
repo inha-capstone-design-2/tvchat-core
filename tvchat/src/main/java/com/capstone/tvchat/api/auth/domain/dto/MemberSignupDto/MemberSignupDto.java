@@ -1,11 +1,13 @@
 package com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto;
 
 import com.capstone.tvchat.api.member.domain.entity.Member;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Collection;
 
+@Data
 @NoArgsConstructor
 public class MemberSignupDto {
     private String email;
