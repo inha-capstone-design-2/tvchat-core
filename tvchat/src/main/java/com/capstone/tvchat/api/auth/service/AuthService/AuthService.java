@@ -2,6 +2,7 @@ package com.capstone.tvchat.api.auth.service.AuthService;
 
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
 import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
+import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -26,6 +27,8 @@ public class AuthService {
 
     @Transactional
     public MemberResponseDto signup(MemberSignupDto memberSignupDto) {
-        return null;
+        Member member = MemberSignupDto.toMember(memberSignupDto, passwordEncoder);
+        member = memberRepository.save(member);
+        return MemberResponseDto.toDto(member);
     }
 }

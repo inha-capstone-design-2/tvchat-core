@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:mysql://skysrd.iptime.org:3306/tvtalk
+    hikari:
+      username: api
+      password: modyeo!@
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jwt:
+    secret: 7JWI64WVLCDsmKTrnpzrp4zsnbTslbwK66y87J2M7ZGcIOyXhuydtCDssLgg64SI64uk7Jq0IOuqqeyGjOumrArsoJXtlbTsp4Qg6rec7LmZ7LKY65+8Cuy2lOyatCDrrLjqsIDsl5Ag64qYIOuYkeqwmeydgCDrhKQg7J6Q66asCuygnOuMgOuhnCDsnpgg66i57Ja0LCDri6Qg7KeA64KY6rCA64uI6rmMCuyYiOyghOyymOufvCDsnqDrj4Qg7J6YIOyekOqyjCDrkKAg6rGw7JW8CuynhOyLrOycvOuhnCDruYzqsowK64SI64qUIOuNlCDtlonrs7XtlaAg7J6Q6rKp7J20IOyeiOyWtArqt7jrn7Ag66eQ7J2AIO2VmOyngCDrp4gg7KCc67CcCuq3uCDrp5DsnbQg642UIOyVhO2UiCDqsbAg7JWM7J6W7JWECuyCrOueke2VtOykhCDqsbDrnbzrqbAsIOuLpCDrrZDslbw/CuyWtOuWpCDrp5jsnYQg7KSAIOqxtOyngCDrhIjripQg66qo66W8IOqxsOyVvArsmbjroZzsm6DrjZgg66eM7YG8CuuEiOulvCDrhIjrs7Tri6Qg7IKs656R7ZW07KSEIOyCrOuejCDqvK0g66eM64Ks7Jy866m0IO2VtArrgrTqsIAg7JWE64uI65287IScIOuvuOyViO2VtArso7zripQg6rKMIOyJveyngOqwgCDslYrslYQK6re465+wIOunkOydgCDtlZjsp4Ag66eIIOygnOuwnArqt7gg66eQ7J20IOuNlCDslYTtlIgg6rGwIOyVjOyeluyVhArsgqzrnpHtlbTspIQg6rGw652866mwLCDri6Qg662Q7JW8PwrslrTrlqQg66eY7J2EIOykgCDqsbTsp4Ag64Gd64K0IOuqqOulvArshpTsp4Htnogg66eQ7ZW07KSE656YIOygnOuwnD8K64SI652866m0IOuLpCDrr7/ripQg6rGwIOyVjOyeluyVhArrhKQg66eQ64yA66GcIOyWuOygoOqwgArrgpjrj4Qg64KYIOqwmeydgCDriITqtbDqsIDsl5Dqsowg7IKs656R67Cb6rKMIOuQoOq5jD8=
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        show_sql: true
+        default_batch_fetch_size: 1000
+    database: mysql
+    database-platform: org.hibernate.spatial.dialect.mysql.MySQL56InnoDBSpatialDialect
+    open-in-view: false
+
+  redis:
+    host: skysrd.iptime.org/1
+    port: 6379
+    password: modyeo!@
+
+  logging:
+    level:
+      org.hibernate.sql: debug
+
+  profiles:
+    active: dev
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
