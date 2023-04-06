@@ -1,5 +1,6 @@
 package com.capstone.tvchat.common.domain;
 
+import com.capstone.tvchat.common.domain.enums.UseYn;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +17,9 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Getter
 public class BaseEntity {
+
+    @Column(name = "use_yn")
+    private UseYn useYn;
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)
