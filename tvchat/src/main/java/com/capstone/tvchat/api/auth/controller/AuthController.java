@@ -1,10 +1,14 @@
 package com.capstone.tvchat.api.auth.controller;
 
+import com.capstone.tvchat.api.auth.domain.dto.MemberLoginDto;
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
 import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
+import com.capstone.tvchat.api.auth.domain.dto.TokenDto;
+import com.capstone.tvchat.api.auth.domain.dto.TokenRequestDto;
 import com.capstone.tvchat.api.auth.service.AuthService.AuthService;
 import com.capstone.tvchat.common.exception.code.MemberErrorCode;
 import com.capstone.tvchat.common.result.JsonResultData;
+import com.capstone.tvchat.common.result.ResponseHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -44,16 +48,68 @@ public class AuthController {
             memberSignupDto.setPassword(password);
 
             MemberResponseDto memberResponseDto = authService.signup(memberSignupDto);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(JsonResultData.successResultBuilder()
-                            .data(memberResponseDto)
-                            .build());
+            return ResponseHandler.generate()
+                    .data(memberResponseDto)
+                    .status(HttpStatus.CREATED)
+                    .build();
         }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(JsonResultData.failResultBuilder()
-                            .errorMessage(MemberErrorCode.ENTERED_EMAIL_AND_PASSWORD.getMessage())
-                            .errorCode(MemberErrorCode.ENTERED_EMAIL_AND_PASSWORD.getCode())
-                            .build());
+            return ResponseHandler.failResultGenerate()
+                    .errorMessage(MemberErrorCode.ENTERED_EMAIL_AND_PASSWORD.getMessage())
+                    .errorCode(MemberErrorCode.ENTERED_EMAIL_AND_PASSWORD.getCode())
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();
         }
+    }
+
+    @ApiOperation(value = "로그인 API")
+    @PostMapping("/login")
+    public ResponseEntity<?> login(
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        if (authorization != null) {
+            String authBasic = authorization.substring(BASIC_PREFIX.length());
+
+            String decodedAuthBasic = new String(Base64.getDecoder().decode(authBasic), StandardCharsets.UTF_8);
+            String[] authUserInfo = decodedAuthBasic.split(":");
+
+            String email = authUserInfo[0];
+            String password = authUserInfo[1];
+
+            MemberLoginDto memberLoginDto = MemberLoginDto.of()
+                    .email(email)
+                    .password(password)
+                    .build();
+
+            TokenDto tokenDto = authService.login(memberLoginDto);
+            return ResponseHandler.generate()
+                    .data(tokenDto)
+                    .status(HttpStatus.OK)
+                    .build();
+        }else {
+            return ResponseHandler.failResultGenerate()
+                    .errorMessage(MemberErrorCode.ENTERED_EMAIL_AND_PASSWORD.getMessage())
+                    .errorCode(MemberErrorCode.ENTERED_EMAIL_AND_PASSWORD.getCode())
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
+    }
+
+    @ApiOperation(value = "토큰 재발급 API")
+    @PostMapping("/reissue")
+    public ResponseEntity<?> reissue(@Valid @RequestBody TokenRequestDto tokenRequestDto) {
+        TokenDto tokenDto = authService.reissue(tokenRequestDto);
+        return ResponseHandler.generate()
+                .data(tokenDto)
+                .status(HttpStatus.OK)
+                .build();
+    }
+
+    @ApiOperation(value = "로그아웃 API")
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@Valid @RequestBody TokenRequestDto tokenRequestDto) {
+        authService.logout(tokenRequestDto);
+        return ResponseHandler.generate()
+                .data(null)
+                .status(HttpStatus.OK)
+                .build();
     }
 }

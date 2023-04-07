@@ -6,6 +6,7 @@ import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.api.member.domain.entity.enumerate.Authority;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.common.enumerate.Yn;
+import com.capstone.tvchat.common.provider.JwtTokenProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -37,6 +38,9 @@ class AuthServiceTest {
     @Mock
     private StringRedisTemplate redisTemplate;
 
+    @Mock
+    private JwtTokenProvider jwtTokenProvider;
+
     Member FIXTURE_MEM_01 = Member.of()
             .email("tester@test.com")
             .nickname("tester")
@@ -54,7 +58,7 @@ class AuthServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        authService = new AuthService(authenticationManagerBuilder,passwordEncoder,memberRepository,redisTemplate);
+        authService = new AuthService(authenticationManagerBuilder,passwordEncoder,memberRepository,redisTemplate,jwtTokenProvider);
     }
 
     @Test

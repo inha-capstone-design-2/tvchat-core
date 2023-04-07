@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Transactional
@@ -41,5 +42,23 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON).content(content))
                 .andExpect(jsonPath("$.data.email").value("tester@test.com"))
                 .andDo(print());
+    }
+
+    @Test
+    void logout() {
+
+    }
+
+    @Test
+    void login() throws Exception {
+        mockMvc.perform(
+                        post("/api/auth/login").header(HttpHeaders.AUTHORIZATION,"Basic dGVzdGVyQHRlc3QuY29tOnRlc3Rlcg=="))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    void reissue(){
+
     }
 }

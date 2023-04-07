@@ -25,7 +25,7 @@ spring:
     open-in-view: false
 
   redis:
-    host: skysrd.iptime.org/1
+    host: skysrd.iptime.org
     port: 6379
     password: modyeo!@
 
