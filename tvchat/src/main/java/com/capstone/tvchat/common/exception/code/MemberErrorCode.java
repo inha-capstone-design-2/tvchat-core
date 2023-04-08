@@ -5,7 +5,9 @@ import lombok.Getter;
 @Getter
 public enum MemberErrorCode {
 
-    ENTERED_EMAIL_AND_PASSWORD("ENTERED_EMAIL_AND_PASSWORD","잘못된 이메일, 패스워드 형식입니다.");
+    ENTERED_EMAIL_AND_PASSWORD("ENTERED_EMAIL_AND_PASSWORD","잘못된 이메일, 패스워드 형식입니다."),
+
+    NOT_FOUND_MEMBER("NOT_FOUND_MEMBER","찾을 수 없는 회원입니다.");
 
     private String code;
 
