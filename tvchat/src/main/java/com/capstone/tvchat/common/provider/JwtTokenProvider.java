@@ -1,6 +1,6 @@
 package com.capstone.tvchat.common.provider;
 
-import com.capstone.tvchat.api.auth.domain.dto.TokenDto;
+import com.capstone.tvchat.api.auth.domain.dto.response.TokenDto;
 import com.capstone.tvchat.common.exception.CustomAuthException;
 import com.capstone.tvchat.common.exception.code.AuthErrorCode;
 import com.capstone.tvchat.common.result.JsonResultData;

@@ -1,6 +1,6 @@
 package com.capstone.tvchat.api.bbs.domain.dto.response;
 
-import com.capstone.tvchat.api.member.auth.domain.dto.response.MemberResponseDto;
+import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
 import com.capstone.tvchat.api.bbs.domain.entity.Article;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,11 +1,11 @@
 package com.capstone.tvchat.api.auth.service.AuthService;
 
-import com.capstone.tvchat.api.auth.domain.dto.MemberLoginDto;
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
-import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
-import com.capstone.tvchat.api.auth.domain.dto.PasswordUpdateRequest;
-import com.capstone.tvchat.api.auth.domain.dto.TokenDto;
-import com.capstone.tvchat.api.auth.domain.dto.TokenRequestDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.MemberLoginDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.MemberSignupDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.PasswordUpdateRequest;
+import com.capstone.tvchat.api.auth.domain.dto.request.TokenRequestDto;
+import com.capstone.tvchat.api.auth.domain.dto.response.TokenDto;
 import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.common.exception.ApiException;
@@ -24,7 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service

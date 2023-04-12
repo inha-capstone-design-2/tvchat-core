@@ -1,6 +1,6 @@
 package com.capstone.tvchat.common.domain;
 
-import com.capstone.tvchat.common.domain.enums.UseYn;
+import com.capstone.tvchat.common.enumerate.Yn;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,9 +8,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class)
@@ -18,8 +16,9 @@ import java.time.LocalDateTime;
 @Getter
 public class BaseEntity {
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "use_yn")
-    private UseYn useYn;
+    private Yn useYn;
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)

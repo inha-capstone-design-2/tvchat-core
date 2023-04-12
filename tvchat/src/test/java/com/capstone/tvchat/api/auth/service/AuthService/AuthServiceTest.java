@@ -1,9 +1,9 @@
 package com.capstone.tvchat.api.auth.service.AuthService;
 
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
-import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.MemberSignupDto;
 import com.capstone.tvchat.api.member.domain.entity.Member;
-import com.capstone.tvchat.api.member.domain.entity.enumerate.Authority;
+import com.capstone.tvchat.api.member.domain.enumerate.Authority;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.common.enumerate.Yn;
 import com.capstone.tvchat.common.provider.JwtTokenProvider;
@@ -15,10 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 

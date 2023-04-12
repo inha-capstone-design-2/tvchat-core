@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.member.auth.domain.dto;
+package com.capstone.tvchat.api.auth.domain.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PasswordUpdateRequest {
-
     private String email;
 
     private String password;

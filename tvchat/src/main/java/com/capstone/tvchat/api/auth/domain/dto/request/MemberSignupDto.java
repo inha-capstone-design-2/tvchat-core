@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.member.auth.domain.dto.request;
+package com.capstone.tvchat.api.auth.domain.dto.request;
 
 import com.capstone.tvchat.api.member.domain.entity.Member;
 import lombok.Builder;
@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Collection;
 
 @Data
 @NoArgsConstructor

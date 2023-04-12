@@ -1,14 +1,13 @@
 package com.capstone.tvchat.api.auth.controller;
 
-import com.capstone.tvchat.api.auth.domain.dto.MemberLoginDto;
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
-import com.capstone.tvchat.api.auth.domain.dto.MemberSignupDto.MemberSignupDto;
-import com.capstone.tvchat.api.auth.domain.dto.PasswordUpdateRequest;
-import com.capstone.tvchat.api.auth.domain.dto.TokenDto;
-import com.capstone.tvchat.api.auth.domain.dto.TokenRequestDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.MemberLoginDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.MemberSignupDto;
+import com.capstone.tvchat.api.auth.domain.dto.request.PasswordUpdateRequest;
+import com.capstone.tvchat.api.auth.domain.dto.request.TokenRequestDto;
+import com.capstone.tvchat.api.auth.domain.dto.response.TokenDto;
 import com.capstone.tvchat.api.auth.service.AuthService.AuthService;
 import com.capstone.tvchat.common.exception.code.MemberErrorCode;
-import com.capstone.tvchat.common.result.JsonResultData;
 import com.capstone.tvchat.common.result.ResponseHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -1,6 +1,6 @@
 package com.capstone.tvchat.common.auditor;
 
-import com.capstone.tvchat.api.member.domain.entity.enumerate.Authority;
+import com.capstone.tvchat.api.member.domain.enumerate.Authority;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
