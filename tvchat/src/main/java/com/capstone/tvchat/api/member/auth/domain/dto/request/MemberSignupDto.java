@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.auth.domain.dto.request;
+package com.capstone.tvchat.api.member.auth.domain.dto.request;
 
 import com.capstone.tvchat.api.member.domain.entity.Member;
 import lombok.NoArgsConstructor;
