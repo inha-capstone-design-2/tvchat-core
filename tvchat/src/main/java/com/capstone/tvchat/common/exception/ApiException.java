@@ -1,6 +1,6 @@
 package com.capstone.tvchat.common.exception;
 
-import com.capstone.tvchat.common.domain.JsonResultData;
+import com.capstone.tvchat.common.result.JsonResultData;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
