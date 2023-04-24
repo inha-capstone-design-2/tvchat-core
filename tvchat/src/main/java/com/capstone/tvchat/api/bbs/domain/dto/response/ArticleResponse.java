@@ -29,4 +29,12 @@ public class ArticleResponse {
         this.createdTime = article.getCreatedDate();
         this.updatedTime = article.getLastModifiedDate();
     }
+
+    public static ArticleResponse toResponse(Article article) {
+        return ArticleResponse.builder()
+                .article(article)
+                .memberResponseDto(MemberResponseDto.toDto(article.getMember()))
+                .boardResponse(BoardResponse.toResponse(article.getBoard()))
+                .build();
+    }
 }

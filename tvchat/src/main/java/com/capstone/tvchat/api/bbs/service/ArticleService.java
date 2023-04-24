@@ -15,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -47,5 +50,17 @@ public class ArticleService {
 
     public ArticleResponse modifyArticle(Long articleId, ModifyArticleRequest modifyArticleRequest) {
         return null;
+    }
+
+    public List<ArticleResponse> getArticleByBoard(Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(BoardErrorCode.BOARD_NOT_FOUND.getMessage())
+                        .errorCode(BoardErrorCode.BOARD_NOT_FOUND.getCode())
+                        .build());
+
+        return articleRepository.findByBoard(board)
+                .stream().map(ArticleResponse::toResponse)
+                .collect(Collectors.toList());
     }
 }
