@@ -11,7 +11,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -29,7 +29,6 @@ spring:
 logging:
   level:
     org.hibernate.sql: debug
-
 
 profiles:
   active: local

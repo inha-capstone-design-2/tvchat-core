@@ -59,6 +59,6 @@ public class BoardService {
                         .errorCode(BoardErrorCode.BOARD_NOT_FOUND.getCode())
                         .build());
 
-
+        return null;
     }
 }

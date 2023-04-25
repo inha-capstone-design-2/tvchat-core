@@ -8,6 +8,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.6.8'
 	id 'io.spring.dependency-management' version '1.1.0'
+	//querydsl 추가
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
@@ -26,6 +27,7 @@ repositories {
 }
 
 dependencies {
+	implementation group: 'org.hibernate', name: 'hibernate-spatial', version: '5.6.9.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -39,13 +41,13 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
+	//querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 	runtimeOnly 'mysql:mysql-connector-java'
@@ -54,7 +56,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+targetCompatibility = JavaVersion.VERSION_11
 
+//querydsl 추가 시작
 def querydslDir = "$buildDir/generated/querydsl"
 
 querydsl {

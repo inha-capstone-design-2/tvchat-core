@@ -3,6 +3,7 @@ package com.capstone.tvchat.api.member.domain.entity;
 import com.capstone.tvchat.api.bookmark.domain.entity.Bookmark;
 import com.capstone.tvchat.api.member.domain.enumerate.Authority;
 import com.capstone.tvchat.common.domain.BaseEntity;
+import com.capstone.tvchat.common.enumerate.Yn;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,18 +31,39 @@ public class Member extends BaseEntity {
 
     @Column(name = "member_nickname")
     private String nickname;
-
     @Enumerated(EnumType.STRING)
     private Authority authority;
-
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Bookmark> bookmarkList = new ArrayList<>();
 
-    @Builder(builderClassName = "memberSignupBuilder", builderMethodName = "memberSignupBuilder")
-    public Member(Long id, String email, String password, String nickname) {
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "use_yn")
+    private Yn useYn;
+
+    @Builder(builderClassName = "of",builderMethodName = "of")
+    public Member(Long id, String email, String password, String nickname, Authority authority, List<Bookmark> bookmarkList, Yn useYn) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.authority = authority;
+        this.bookmarkList = bookmarkList;
+        this.useYn = useYn;
+    }
+
+    @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
+    public static Member create(String email, String password, String nickname){
+        return Member.of()
+                .email(email)
+                .password(password)
+                .nickname(nickname)
+                .useYn(Yn.Y)
+                .authority(Authority.ROLE_USER)
+                .build();
+    }
+
+
+    public void changePassword(String password) {
+        this.password = password;
     }
 }
