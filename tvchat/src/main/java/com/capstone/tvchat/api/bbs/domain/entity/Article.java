@@ -1,7 +1,7 @@
 package com.capstone.tvchat.api.bbs.domain.entity;
 
-import com.capstone.tvchat.api.bbs.domain.entity.Board;
 import com.capstone.tvchat.api.member.domain.entity.Member;
+import com.capstone.tvchat.common.domain.BaseEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Table(name = "ARTICLE")
 @NoArgsConstructor
-public class Article {
+public class Article extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "article_id")
     private Long id;

@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.bbs.domain.enums;
+package com.capstone.tvchat.api.program.domain.enums;
 
 import lombok.Getter;
 

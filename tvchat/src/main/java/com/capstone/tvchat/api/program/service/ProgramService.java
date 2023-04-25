@@ -1,6 +1,6 @@
 package com.capstone.tvchat.api.program.service;
 
-import com.capstone.tvchat.api.bbs.domain.enums.ProgramErrorCode;
+import com.capstone.tvchat.api.program.domain.enums.ProgramErrorCode;
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
 import com.capstone.tvchat.api.channel.domain.enums.ChannelErrorCode;
 import com.capstone.tvchat.api.channel.repository.ChannelRepository;

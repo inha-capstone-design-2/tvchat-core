@@ -1,10 +1,13 @@
 package com.capstone.tvchat.api.bbs.service;
 
 import com.capstone.tvchat.api.bbs.domain.dto.request.BoardCreateRequest;
+import com.capstone.tvchat.api.bbs.domain.dto.request.ModifyBoardRequest;
 import com.capstone.tvchat.api.bbs.domain.dto.response.BoardResponse;
-import com.capstone.tvchat.api.bbs.domain.enums.ProgramErrorCode;
+import com.capstone.tvchat.api.bbs.domain.entity.Board;
+import com.capstone.tvchat.api.bbs.domain.enums.BoardErrorCode;
 import com.capstone.tvchat.api.bbs.repository.BoardRepository;
 import com.capstone.tvchat.api.program.domain.entity.Program;
+import com.capstone.tvchat.api.program.domain.enums.ProgramErrorCode;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +46,19 @@ public class BoardService {
         return boardRepository.findAll().stream()
                 .map(BoardResponse::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteBoard(Long boardId) {
+        boardRepository.deleteById(boardId);
+    }
+
+    public Long modifyBoard(Long boardId, ModifyBoardRequest modifyBoardRequest) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(BoardErrorCode.BOARD_NOT_FOUND.getMessage())
+                        .errorCode(BoardErrorCode.BOARD_NOT_FOUND.getCode())
+                        .build());
+
+        return null;
     }
 }

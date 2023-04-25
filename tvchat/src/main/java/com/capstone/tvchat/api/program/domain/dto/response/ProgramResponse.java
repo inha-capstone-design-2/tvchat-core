@@ -2,7 +2,6 @@ package com.capstone.tvchat.api.program.domain.dto.response;
 
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
