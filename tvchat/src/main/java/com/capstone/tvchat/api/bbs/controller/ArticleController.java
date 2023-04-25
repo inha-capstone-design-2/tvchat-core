@@ -40,6 +40,16 @@ public class ArticleController {
         );
     }
 
+    @ApiOperation("Article 조회")
+    @GetMapping("/{article-id}")
+    public ResponseEntity<?> getArticle(@RequestParam(name = "article-id")Long articleId) {
+        return ResponseEntity.ok(
+                JsonResultData.successResultBuilder()
+                        .data(articleService.getArticle(articleId))
+                        .build()
+        );
+    }
+
     @ApiOperation("Article 삭제 API")
     @DeleteMapping("/{article-id}")
     public ResponseEntity<?> deleteArticle(@RequestParam(name = "article-id")Long articleId) {

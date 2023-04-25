@@ -4,6 +4,7 @@ import com.capstone.tvchat.api.bbs.domain.dto.request.CreateArticleRequest;
 import com.capstone.tvchat.api.bbs.domain.dto.request.ModifyArticleRequest;
 import com.capstone.tvchat.api.bbs.domain.dto.response.ArticleResponse;
 import com.capstone.tvchat.api.bbs.domain.entity.Board;
+import com.capstone.tvchat.api.bbs.domain.enums.ArticleErrorCode;
 import com.capstone.tvchat.api.bbs.domain.enums.BoardErrorCode;
 import com.capstone.tvchat.api.bbs.repository.ArticleRepository;
 import com.capstone.tvchat.api.bbs.repository.BoardRepository;
@@ -12,6 +13,7 @@ import com.capstone.tvchat.api.member.domain.enums.MemberErrorCode;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,5 +64,16 @@ public class ArticleService {
         return articleRepository.findByBoard(board)
                 .stream().map(ArticleResponse::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public ArticleResponse getArticle(Long articleId) {
+        return ArticleResponse.toResponse(
+                articleRepository.findById(articleId)
+                        .orElseThrow(() -> ApiException.builder()
+                                .errorMessage(ArticleErrorCode.ARTICLE_NOT_FOUND.getMessage())
+                                .errorCode(ArticleErrorCode.ARTICLE_NOT_FOUND.getCode())
+                                .status(HttpStatus.NOT_FOUND)
+                                .build())
+        );
     }
 }
