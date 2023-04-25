@@ -2,7 +2,7 @@ package com.capstone.tvchat.api.bookmark.controller;
 
 import com.capstone.tvchat.api.bookmark.domain.dto.request.CreateBookmarkRequest;
 import com.capstone.tvchat.api.bookmark.service.BookmarkService;
-import com.capstone.tvchat.common.domain.JsonResultData;
+import com.capstone.tvchat.common.result.ResponseHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +21,10 @@ public class BookmarkController {
     @ApiOperation("Bookmark 생성 API")
     @PostMapping("/")
     public ResponseEntity<?> createBookmark(@RequestBody CreateBookmarkRequest createBookmarkRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(bookmarkService.createBookmark(createBookmarkRequest));
+        return ResponseHandler.generate()
+                .data(bookmarkService.createBookmark(createBookmarkRequest))
+                .status(HttpStatus.CREATED)
+                .build();
     }
 
     @ApiOperation("Bookmark 삭제 API")
@@ -30,11 +32,10 @@ public class BookmarkController {
     public ResponseEntity<?> deleteBookmark(@RequestParam(name = "bookmark-id")Long bookmarkId) {
         bookmarkService.deleteBookmark(bookmarkId);
 
-        return ResponseEntity.ok(
-                JsonResultData.successResultBuilder()
-                        .data(null)
-                        .build()
-        );
+        return ResponseHandler.generate()
+                .data(null)
+                .status(HttpStatus.OK)
+                .build();
     }
 
 }
