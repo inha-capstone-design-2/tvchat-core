@@ -36,10 +36,6 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Bookmark> bookmarkList = new ArrayList<>();
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "use_yn")
-    private Yn useYn;
-
     @Builder(builderClassName = "of",builderMethodName = "of")
     public Member(Long id, String email, String password, String nickname, Authority authority, List<Bookmark> bookmarkList, Yn useYn) {
         this.id = id;
@@ -48,7 +44,6 @@ public class Member extends BaseEntity {
         this.nickname = nickname;
         this.authority = authority;
         this.bookmarkList = bookmarkList;
-        this.useYn = useYn;
     }
 
     @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")

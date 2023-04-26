@@ -1,6 +1,6 @@
 package com.capstone.tvchat.common.domain;
 
-import com.capstone.tvchat.common.enumerate.Yn;
+import com.capstone.tvchat.common.domain.enums.UseYn;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,7 +18,7 @@ public class BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "use_yn")
-    private Yn useYn;
+    private UseYn useYn;
 
     @CreatedDate
     @Column(name = "created_time", updatable = false)
