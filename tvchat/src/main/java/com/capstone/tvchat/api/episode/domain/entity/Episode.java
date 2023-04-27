@@ -32,6 +32,10 @@ public class Episode extends BaseEntity {
     @Column(name = "broadcast_end_time")
     private LocalDateTime endTime;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "use_yn")
+    private UseYn useYn;
+
     @Builder
     public Episode(Long id, Program program, String description, LocalDateTime startTime, LocalDateTime endTime, UseYn useYn) {
         this.id = id;
@@ -39,6 +43,7 @@ public class Episode extends BaseEntity {
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.useYn = useYn;
     }
 
     @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
@@ -50,5 +55,13 @@ public class Episode extends BaseEntity {
                 .endTime(endTime)
                 .useYn(UseYn.Y)
                 .build();
+    }
+
+    public void deActivate() {
+        this.useYn = UseYn.N;
+    }
+
+    public void activate() {
+        this.useYn = UseYn.Y;
     }
 }
