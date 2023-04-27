@@ -3,6 +3,7 @@ package com.capstone.tvchat.api.bbs.service;
 import com.capstone.tvchat.api.bbs.domain.dto.request.CreateArticleRequest;
 import com.capstone.tvchat.api.bbs.domain.dto.request.ModifyArticleRequest;
 import com.capstone.tvchat.api.bbs.domain.dto.response.ArticleResponse;
+import com.capstone.tvchat.api.bbs.domain.entity.Article;
 import com.capstone.tvchat.api.bbs.domain.entity.Board;
 import com.capstone.tvchat.api.bbs.domain.enums.ArticleErrorCode;
 import com.capstone.tvchat.api.bbs.domain.enums.BoardErrorCode;
@@ -33,12 +34,14 @@ public class ArticleService {
                 .orElseThrow(() -> ApiException.builder()
                         .errorMessage(BoardErrorCode.BOARD_NOT_FOUND.getMessage())
                         .errorCode(BoardErrorCode.BOARD_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
                         .build());
 
         Member member = memberRepository.findById(createArticleRequest.getMemberId())
                 .orElseThrow(() -> ApiException.builder()
                         .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
                         .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
                         .build());
 
         return articleRepository.save(
@@ -47,7 +50,14 @@ public class ArticleService {
     }
 
     public void deleteArticle(Long articleId) {
-        articleRepository.deleteById(articleId);
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(ArticleErrorCode.ARTICLE_NOT_FOUND.getMessage())
+                        .errorCode(ArticleErrorCode.ARTICLE_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build());
+
+        article.delete();
     }
 
     public ArticleResponse modifyArticle(Long articleId, ModifyArticleRequest modifyArticleRequest) {
@@ -59,6 +69,7 @@ public class ArticleService {
                 .orElseThrow(() -> ApiException.builder()
                         .errorMessage(BoardErrorCode.BOARD_NOT_FOUND.getMessage())
                         .errorCode(BoardErrorCode.BOARD_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
                         .build());
 
         return articleRepository.findByBoard(board)
@@ -72,7 +83,7 @@ public class ArticleService {
                         .orElseThrow(() -> ApiException.builder()
                                 .errorMessage(ArticleErrorCode.ARTICLE_NOT_FOUND.getMessage())
                                 .errorCode(ArticleErrorCode.ARTICLE_NOT_FOUND.getCode())
-                                .status(HttpStatus.NOT_FOUND)
+                                .status(HttpStatus.BAD_REQUEST)
                                 .build())
         );
     }

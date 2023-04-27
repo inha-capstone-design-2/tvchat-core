@@ -57,11 +57,7 @@ public class Article extends BaseEntity {
                 .build();
     }
 
-    public void deActivate() {
+    public void delete() {
         this.useYn = UseYn.N;
-    }
-
-    public void activate() {
-        this.useYn = UseYn.Y;
     }
 }
