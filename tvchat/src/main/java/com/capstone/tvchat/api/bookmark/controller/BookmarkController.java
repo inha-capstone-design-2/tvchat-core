@@ -2,17 +2,13 @@ package com.capstone.tvchat.api.bookmark.controller;
 
 import com.capstone.tvchat.api.bookmark.domain.dto.request.CreateBookmarkRequest;
 import com.capstone.tvchat.api.bookmark.service.BookmarkService;
-import com.capstone.tvchat.api.member.domain.enumerate.Authority;
-import com.capstone.tvchat.common.domain.JsonResultData;
 import com.capstone.tvchat.common.result.ResponseHandler;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,20 +22,20 @@ public class BookmarkController {
     @ApiOperation("Bookmark 생성 API")
     @PostMapping("/")
     public ResponseEntity<?> createBookmark(@RequestBody CreateBookmarkRequest createBookmarkRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(bookmarkService.createBookmark(createBookmarkRequest));
+        return ResponseHandler.generate()
+                .data(bookmarkService.createBookmark(createBookmarkRequest))
+                .status(HttpStatus.CREATED)
+                .build();
     }
 
     @ApiOperation("Bookmark 삭제 API")
     @DeleteMapping("/{bookmark-id}")
     public ResponseEntity<?> deleteBookmark(@RequestParam(name = "bookmark-id")Long bookmarkId) {
         bookmarkService.deleteBookmark(bookmarkId);
-
-        return ResponseEntity.ok(
-                JsonResultData.successResultBuilder()
-                        .data(null)
-                        .build()
-        );
+        return ResponseHandler.generate()
+                .data(null)
+                .status(HttpStatus.OK)
+                .build();
     }
 
     @ApiOperation("Bookmark 조회 API")
