@@ -44,6 +44,13 @@ public class AuthService {
 
     @Transactional
     public MemberResponseDto signup(MemberSignupDto memberSignupDto) {
+        if(memberRepository.existsByEmail(memberSignupDto.getEmail())) {
+            throw ApiException.builder()
+                    .errorMessage(MemberErrorCode.ALREADY_EXIST_USER.getMessage())
+                    .errorCode(MemberErrorCode.ALREADY_EXIST_USER.getCode())
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build();
+        }
         Member member = MemberSignupDto.toMember(memberSignupDto, passwordEncoder);
         member = memberRepository.save(member);
         return MemberResponseDto.toDto(member);
