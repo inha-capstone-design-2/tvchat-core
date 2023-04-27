@@ -23,7 +23,6 @@ public class ArticleController {
     @PostMapping("/")
     public ResponseEntity<?> createArticle(@RequestBody CreateArticleRequest createArticleRequest) {
         articleService.createArticle(createArticleRequest);
-
         return ResponseHandler.generate()
                 .data(null)
                 .status(HttpStatus.CREATED)
@@ -33,28 +32,25 @@ public class ArticleController {
     @ApiOperation("Article Board 단위 조회")
     @GetMapping("/{board-id}")
     public ResponseEntity<?> getArticleByBoard(@RequestParam(name = "board-id")Long boardId) {
-        return ResponseEntity.ok(
-                JsonResultData.successResultBuilder()
-                        .data(articleService.getArticleByBoard(boardId))
-                        .build()
-        );
+        return ResponseHandler.generate()
+                .data(articleService.getArticleByBoard(boardId))
+                .status(HttpStatus.OK)
+                .build();
     }
 
     @ApiOperation("Article 조회")
     @GetMapping("/{article-id}")
     public ResponseEntity<?> getArticle(@RequestParam(name = "article-id")Long articleId) {
-        return ResponseEntity.ok(
-                JsonResultData.successResultBuilder()
-                        .data(articleService.getArticle(articleId))
-                        .build()
-        );
+        return ResponseHandler.generate()
+                .data(articleService.getArticle(articleId))
+                .status(HttpStatus.OK)
+                .build();
     }
 
     @ApiOperation("Article 삭제 API")
     @DeleteMapping("/{article-id}")
     public ResponseEntity<?> deleteArticle(@RequestParam(name = "article-id")Long articleId) {
         articleService.deleteArticle(articleId);
-
         return ResponseHandler.generate()
                 .data(null)
                 .status(HttpStatus.OK)
