@@ -40,4 +40,15 @@ public class Episode extends BaseEntity {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
+    public static Episode create(Program program, String description, LocalDateTime startTime, LocalDateTime endTime) {
+        return Episode.builder()
+                .program(program)
+                .description(description)
+                .startTime(startTime)
+                .endTime(endTime)
+                .useYn(UseYn.Y)
+                .build();
+    }
 }
