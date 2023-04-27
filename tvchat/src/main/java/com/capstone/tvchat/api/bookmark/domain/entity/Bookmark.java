@@ -8,12 +8,14 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Table(name = "BOOKMARK")
+@Where(clause = "use_yn = 'Y'")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Bookmark extends BaseEntity {
     @Id
@@ -48,5 +50,9 @@ public class Bookmark extends BaseEntity {
                 .program(program)
                 .useYn(UseYn.Y)
                 .build();
+    }
+
+    public void delete() {
+        this.useYn = UseYn.N;
     }
 }
