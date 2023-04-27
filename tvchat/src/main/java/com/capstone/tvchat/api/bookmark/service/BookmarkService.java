@@ -1,6 +1,7 @@
 package com.capstone.tvchat.api.bookmark.service;
 
 import com.capstone.tvchat.api.bookmark.domain.dto.request.CreateBookmarkRequest;
+import com.capstone.tvchat.api.bookmark.domain.dto.response.BookmarkResponse;
 import com.capstone.tvchat.api.bookmark.domain.entity.Bookmark;
 import com.capstone.tvchat.api.bookmark.repository.BookmarkRepository;
 import com.capstone.tvchat.api.channel.domain.enums.ChannelErrorCode;
@@ -11,8 +12,12 @@ import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +50,18 @@ public class BookmarkService {
 
     public void deleteBookmark(Long bookmarkId) {
         bookmarkRepository.deleteById(bookmarkId);
+    }
+
+    public List<BookmarkResponse> getBookmark(String username) {
+        Member member = memberRepository.findByEmail(username)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
+                        .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
+                        .status(HttpStatus.NOT_FOUND)
+                        .build());
+
+        return bookmarkRepository.findByMember(member).stream()
+                .map(BookmarkResponse::toResponse).
+                collect(Collectors.toList());
     }
 }
