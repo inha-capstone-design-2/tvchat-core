@@ -41,10 +41,9 @@ public class BookmarkController {
     @ApiOperation("Bookmark 조회 API")
     @GetMapping("/")
     public ResponseEntity<?> getBookmark() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
         return ResponseHandler.generate()
-                .data(bookmarkService.getBookmark(
-                        SecurityContextHolder.getContext().getAuthentication().getName()
-                ))
+                .data(bookmarkService.getBookmark(email))
                 .status(HttpStatus.OK)
                 .build();
     }

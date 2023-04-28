@@ -60,8 +60,8 @@ public class BookmarkService {
         bookmark.delete();
     }
 
-    public List<BookmarkResponse> getBookmark(String username) {
-        Member member = memberRepository.findByEmail(username)
+    public List<BookmarkResponse> getBookmark(String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> ApiException.builder()
                         .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
                         .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
