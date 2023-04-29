@@ -3,6 +3,7 @@ package com.capstone.tvchat.api.bookmark.service;
 import com.capstone.tvchat.api.bookmark.domain.dto.request.CreateBookmarkRequest;
 import com.capstone.tvchat.api.bookmark.domain.dto.response.BookmarkResponse;
 import com.capstone.tvchat.api.bookmark.domain.entity.Bookmark;
+import com.capstone.tvchat.api.bookmark.domain.enums.BookmarkErrorCode;
 import com.capstone.tvchat.api.bookmark.repository.BookmarkRepository;
 import com.capstone.tvchat.api.channel.domain.enums.ChannelErrorCode;
 import com.capstone.tvchat.api.member.domain.entity.Member;
@@ -42,18 +43,25 @@ public class BookmarkService {
                         .build());
 
         return bookmarkRepository.save(
-                Bookmark.builder()
-                        .program(program)
+                Bookmark.createBuilder()
                         .member(member)
-                        .build()).getId();
+                        .program(program)
+                        .build())
+                .getId();
     }
 
     public void deleteBookmark(Long bookmarkId) {
-        bookmarkRepository.deleteById(bookmarkId);
+        Bookmark bookmark = bookmarkRepository.findById(bookmarkId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(BookmarkErrorCode.BOOKMARK_NOT_FOUND.getMessage())
+                        .errorCode(BookmarkErrorCode.BOOKMARK_NOT_FOUND.getCode())
+                        .build());
+
+        bookmark.delete();
     }
 
-    public List<BookmarkResponse> getBookmark(String username) {
-        Member member = memberRepository.findByEmail(username)
+    public List<BookmarkResponse> getBookmark(String email) {
+        Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> ApiException.builder()
                         .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
                         .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
