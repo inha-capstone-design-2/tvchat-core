@@ -3,9 +3,11 @@ package com.capstone.tvchat.api.episode.domain.dto.request;
 import com.capstone.tvchat.api.episode.domain.entity.Episode;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class CreateEpisodeRequest {
     private Long programId;
     private String description;

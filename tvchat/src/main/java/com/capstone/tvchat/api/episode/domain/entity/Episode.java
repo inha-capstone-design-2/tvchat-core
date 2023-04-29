@@ -57,11 +57,7 @@ public class Episode extends BaseEntity {
                 .build();
     }
 
-    public void deActivate() {
-        this.useYn = UseYn.N;
-    }
-
-    public void activate() {
-        this.useYn = UseYn.Y;
+    public void delete() {
+        this.useYn=UseYn.N;
     }
 }
