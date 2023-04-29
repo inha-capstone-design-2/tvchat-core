@@ -8,16 +8,12 @@ import com.capstone.tvchat.api.episode.domain.enums.EpisodeErrorCode;
 import com.capstone.tvchat.api.episode.repository.EpisodeRepository;
 import com.capstone.tvchat.api.program.domain.dto.response.ProgramResponse;
 import com.capstone.tvchat.api.program.domain.entity.Program;
-import com.capstone.tvchat.api.program.domain.enums.ProgramErrorCode;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -61,16 +57,7 @@ public class EpisodeService {
         return EpisodeResponse.toResponse(episode, ProgramResponse.toResponse(episode.getProgram()));
     }
 
-    public List<EpisodeResponse> getEpisodeByProgram(Long programId) {
-        Program program = programRepository.findById(programId)
-                .orElseThrow(() -> ApiException.builder()
-                        .errorMessage(ProgramErrorCode.PROGRAM_NOT_FOUND.getMessage())
-                        .errorCode(ProgramErrorCode.PROGRAM_NOT_FOUND.getCode())
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build());
-
-        return episodeRepository.findByProgram(program).stream()
-                .map(EpisodeResponse::toResponse)
-                .collect(Collectors.toList());
+    public Object getEpisodeByProgram(Long programId) {
+        return null;
     }
 }
