@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,11 +32,19 @@ public class BookmarkController {
     @DeleteMapping("/{bookmark-id}")
     public ResponseEntity<?> deleteBookmark(@RequestParam(name = "bookmark-id")Long bookmarkId) {
         bookmarkService.deleteBookmark(bookmarkId);
-
         return ResponseHandler.generate()
                 .data(null)
                 .status(HttpStatus.OK)
                 .build();
     }
 
+    @ApiOperation("Bookmark 조회 API")
+    @GetMapping("/")
+    public ResponseEntity<?> getBookmark() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseHandler.generate()
+                .data(bookmarkService.getBookmark(email))
+                .status(HttpStatus.OK)
+                .build();
+    }
 }

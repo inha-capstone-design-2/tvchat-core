@@ -43,7 +43,6 @@ public class ProgramController {
     @PostMapping("/")
     public ResponseEntity<?> createProgram(@RequestBody CreateProgramRequest createProgramRequest) {
 
-
         return ResponseEntity.status(HttpStatus.CREATED)
                         .body(
                                 JsonResultData.successResultBuilder()

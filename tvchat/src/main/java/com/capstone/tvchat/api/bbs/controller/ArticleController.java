@@ -23,10 +23,27 @@ public class ArticleController {
     @PostMapping("/")
     public ResponseEntity<?> createArticle(@RequestBody CreateArticleRequest createArticleRequest) {
         articleService.createArticle(createArticleRequest);
-
         return ResponseHandler.generate()
                 .data(null)
                 .status(HttpStatus.CREATED)
+                .build();
+    }
+
+    @ApiOperation("Article Board 단위 조회")
+    @GetMapping("/{board-id}")
+    public ResponseEntity<?> getArticleByBoard(@RequestParam(name = "board-id")Long boardId) {
+        return ResponseHandler.generate()
+                .data(articleService.getArticleByBoard(boardId))
+                .status(HttpStatus.OK)
+                .build();
+    }
+
+    @ApiOperation("Article 조회")
+    @GetMapping("/{article-id}")
+    public ResponseEntity<?> getArticle(@RequestParam(name = "article-id")Long articleId) {
+        return ResponseHandler.generate()
+                .data(articleService.getArticle(articleId))
+                .status(HttpStatus.OK)
                 .build();
     }
 
@@ -34,7 +51,6 @@ public class ArticleController {
     @DeleteMapping("/{article-id}")
     public ResponseEntity<?> deleteArticle(@RequestParam(name = "article-id")Long articleId) {
         articleService.deleteArticle(articleId);
-
         return ResponseHandler.generate()
                 .data(null)
                 .status(HttpStatus.OK)
