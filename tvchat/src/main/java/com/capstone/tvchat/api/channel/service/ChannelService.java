@@ -8,6 +8,7 @@ import com.capstone.tvchat.api.channel.domain.enums.ChannelErrorCode;
 import com.capstone.tvchat.api.channel.repository.ChannelRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,16 +28,26 @@ public class ChannelService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public Long createChannel(CreateChannelRequest createChannelRequest) {
         return channelRepository.save(
                 CreateChannelRequest.toEntity(createChannelRequest))
                 .getId();
     }
 
+    @Transactional
     public void deleteChannel(Long channelId) {
-        channelRepository.deleteById(channelId);
+        Channel channel = channelRepository.findById(channelId)
+                        .orElseThrow(() -> ApiException.builder()
+                                .errorMessage(ChannelErrorCode.CHANNEL_NOT_FOUND.getMessage())
+                                .errorCode(ChannelErrorCode.CHANNEL_NOT_FOUND.getCode())
+                                .status(HttpStatus.BAD_REQUEST)
+                                .build());
+
+        channel.delete();
     }
 
+    @Transactional
     public ChannelResponse modifyChannel(Long channelId, ModifyChannelRequest modifyChannelRequest) {
         Channel channel = channelRepository.findById(channelId)
                 .orElseThrow(() -> ApiException.builder()
