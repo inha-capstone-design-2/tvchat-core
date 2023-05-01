@@ -29,6 +29,7 @@ public class ArticleService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
 
+    @Transactional
     public Long createArticle(CreateArticleRequest createArticleRequest) {
         Board board = boardRepository.findById(createArticleRequest.getBoardId())
                 .orElseThrow(() -> ApiException.builder()
@@ -49,6 +50,7 @@ public class ArticleService {
         ).getId();
     }
 
+    @Transactional
     public void deleteArticle(Long articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> ApiException.builder()
@@ -60,6 +62,7 @@ public class ArticleService {
         article.delete();
     }
 
+    @Transactional
     public ArticleResponse modifyArticle(Long articleId, ModifyArticleRequest modifyArticleRequest) {
         return null;
     }
