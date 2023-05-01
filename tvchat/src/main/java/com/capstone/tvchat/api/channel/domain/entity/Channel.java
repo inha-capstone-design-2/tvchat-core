@@ -3,6 +3,7 @@ package com.capstone.tvchat.api.channel.domain.entity;
 import com.capstone.tvchat.api.channel.domain.dto.request.ModifyChannelRequest;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.common.domain.BaseEntity;
+import com.capstone.tvchat.common.domain.enums.UseYn;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,9 @@ public class Channel extends BaseEntity {
     @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL)
     private List<Program> programList;
 
+    @Column(name = "use_yn")
+    private UseYn useYn;
+
     @Builder
     public Channel(Long id, String name) {
         this.id = id;
@@ -34,5 +38,9 @@ public class Channel extends BaseEntity {
 
     public void modifyChannel(ModifyChannelRequest modifyChannelRequest) {
         this.name = modifyChannelRequest.getChannelName();
+    }
+
+    public void delete() {
+        this.useYn = UseYn.N;
     }
 }
