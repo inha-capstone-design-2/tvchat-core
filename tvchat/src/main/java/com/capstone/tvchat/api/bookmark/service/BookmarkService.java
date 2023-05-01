@@ -29,6 +29,7 @@ public class BookmarkService {
     private final MemberRepository memberRepository;
     private final ProgramRepository programRepository;
 
+    @Transactional
     public Long createBookmark(CreateBookmarkRequest createBookmarkRequest) {
         Member member = memberRepository.findById(createBookmarkRequest.getMemberId())
                 .orElseThrow(() -> ApiException.builder()
@@ -50,6 +51,7 @@ public class BookmarkService {
                 .getId();
     }
 
+    @Transactional
     public void deleteBookmark(Long bookmarkId) {
         Bookmark bookmark = bookmarkRepository.findById(bookmarkId)
                 .orElseThrow(() -> ApiException.builder()
