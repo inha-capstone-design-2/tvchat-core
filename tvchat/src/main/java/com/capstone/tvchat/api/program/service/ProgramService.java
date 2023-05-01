@@ -12,6 +12,7 @@ import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +46,7 @@ public class ProgramService {
     }
 
 
+    @Transactional
     public Long createProgram(CreateProgramRequest createProgramRequest) {
         Channel channel = channelRepository.findById(createProgramRequest.getChannelId())
                 .orElseThrow(() -> ApiException.builder()
@@ -57,6 +59,7 @@ public class ProgramService {
         ).getId();
     }
 
+    @Transactional
     public ProgramResponse modifyProgram(Long programId, ModifyProgramRequest modifyProgramRequest) {
         Program program = programRepository.findById(programId)
                 .orElseThrow(() -> ApiException.builder()
@@ -75,8 +78,16 @@ public class ProgramService {
         return ProgramResponse.toResponse(program);
     }
 
+    @Transactional
     public void deleteProgram(Long programId) {
-        programRepository.deleteById(programId);
+        Program program = programRepository.findById(programId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(ProgramErrorCode.PROGRAM_NOT_FOUND.getMessage())
+                        .errorCode(ProgramErrorCode.PROGRAM_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build());
+
+        program.delete();
     }
 
     public List<ProgramResponse> searchProgram(ProgramSearch programSearch) {
