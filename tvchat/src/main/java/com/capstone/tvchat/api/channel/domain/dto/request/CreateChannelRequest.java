@@ -10,7 +10,7 @@ public class CreateChannelRequest {
     private String channelName;
 
     public static Channel toEntity(CreateChannelRequest createChannelRequest) {
-        return Channel.builder()
+        return Channel.createBuilder()
                 .name(createChannelRequest.getChannelName())
                 .build();
     }
