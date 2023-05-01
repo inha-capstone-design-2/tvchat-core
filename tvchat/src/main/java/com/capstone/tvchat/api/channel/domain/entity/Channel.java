@@ -27,20 +27,26 @@ public class Channel extends BaseEntity {
     @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL)
     private List<Program> programList;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "use_yn")
     private UseYn useYn;
 
+    @Column(name = "description")
+    private String description;
+
     @Builder
-    public Channel(Long id, String name, UseYn useYn) {
+    public Channel(Long id, String name, UseYn useYn, String description) {
         this.id = id;
         this.name = name;
         this.useYn = useYn;
+        this.description = description;
     }
 
     @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
-    public static Channel create(String name) {
+    public static Channel create(String name, String description) {
         return Channel.builder()
                 .name(name)
+                .description(description)
                 .useYn(UseYn.Y)
                 .build();
     }

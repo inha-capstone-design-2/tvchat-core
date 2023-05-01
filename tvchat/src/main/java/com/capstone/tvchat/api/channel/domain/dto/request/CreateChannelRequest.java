@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateChannelRequest {
     private String channelName;
+    private String description;
 
     public static Channel toEntity(CreateChannelRequest createChannelRequest) {
         return Channel.createBuilder()
                 .name(createChannelRequest.getChannelName())
+                .description(createChannelRequest.getDescription())
                 .build();
     }
 }
