@@ -31,15 +31,17 @@ public class Channel extends BaseEntity {
     private UseYn useYn;
 
     @Builder
-    public Channel(Long id, String name) {
+    public Channel(Long id, String name, UseYn useYn) {
         this.id = id;
         this.name = name;
+        this.useYn = useYn;
     }
 
     @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
     public static Channel create(String name) {
         return Channel.builder()
                 .name(name)
+                .useYn(UseYn.Y)
                 .build();
     }
 
