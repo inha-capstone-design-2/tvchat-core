@@ -2,6 +2,7 @@ package com.capstone.tvchat.api.program.domain.entity;
 
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
 import com.capstone.tvchat.common.domain.BaseEntity;
+import com.capstone.tvchat.common.domain.enums.UseYn;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +27,9 @@ public class Program extends BaseEntity {
     @JoinColumn(name = "channel_id")
     private Channel channel;
 
+    @Column(name = "use_yn")
+    private UseYn useYn;
+
     @Builder
     public Program(Long id, String title, Channel channel) {
         this.id = id;
@@ -36,5 +40,9 @@ public class Program extends BaseEntity {
     public void modifyProgram(String title, Channel channel) {
         this.title = title;
         this.channel = channel;
+    }
+
+    public void delete() {
+        this.useYn = UseYn.N;
     }
 }
