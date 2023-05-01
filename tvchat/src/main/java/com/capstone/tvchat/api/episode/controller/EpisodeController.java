@@ -19,9 +19,9 @@ public class EpisodeController {
 
     @ApiOperation(value = "지정 회차 조회 API")
     @GetMapping("/{episode-id}")
-    public ResponseEntity<?> getEpisode(@RequestParam(name = "episode-id")Long episdoeId) {
+    public ResponseEntity<?> getEpisode(@RequestParam(name = "episode-id")Long episodeId) {
         return ResponseHandler.generate()
-                .data(episodeService.getEpisode(episdoeId))
+                .data(episodeService.getEpisode(episodeId))
                 .status(HttpStatus.OK)
                 .build();
     }
