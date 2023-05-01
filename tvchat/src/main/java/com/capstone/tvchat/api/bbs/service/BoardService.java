@@ -11,6 +11,7 @@ import com.capstone.tvchat.api.program.domain.enums.ProgramErrorCode;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,20 +39,25 @@ public class BoardService {
         ).getId();
     }
 
-    public BoardResponse getBoard(Integer boardId) {
-        return BoardResponse.toResponse(boardRepository.findById(boardId));
-    }
-
     public List<BoardResponse> getAllBoard() {
         return boardRepository.findAll().stream()
                 .map(BoardResponse::toResponse)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void deleteBoard(Long boardId) {
-        boardRepository.deleteById(boardId);
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(BoardErrorCode.BOARD_NOT_FOUND.getMessage())
+                        .errorCode(BoardErrorCode.BOARD_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build());
+
+        board.delete();
     }
 
+    @Transactional
     public Long modifyBoard(Long boardId, ModifyBoardRequest modifyBoardRequest) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> ApiException.builder()
