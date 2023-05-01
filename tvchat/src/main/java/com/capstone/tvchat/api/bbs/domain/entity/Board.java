@@ -64,11 +64,7 @@ public class Board extends BaseEntity {
         this.description = description;
     }
 
-    public void deActivate() {
+    public void delete() {
         this.useYn = UseYn.N;
-    }
-
-    public void activate() {
-        this.useYn = UseYn.Y;
     }
 }
