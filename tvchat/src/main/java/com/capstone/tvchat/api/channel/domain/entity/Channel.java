@@ -36,6 +36,13 @@ public class Channel extends BaseEntity {
         this.name = name;
     }
 
+    @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
+    public static Channel create(String name) {
+        return Channel.builder()
+                .name(name)
+                .build();
+    }
+
     public void modifyChannel(ModifyChannelRequest modifyChannelRequest) {
         this.name = modifyChannelRequest.getChannelName();
     }
