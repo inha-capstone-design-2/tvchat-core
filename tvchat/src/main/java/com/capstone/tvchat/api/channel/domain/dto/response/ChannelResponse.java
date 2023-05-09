@@ -13,12 +13,12 @@ public class ChannelResponse {
     private Long channelId;
     private String channelName;
     private LocalDateTime createdTime;
-    private String createdBy;
+    private Long createdBy;
     private LocalDateTime updatedTime;
-    private String updatedBy;
+    private Long updatedBy;
 
     @Builder
-    public ChannelResponse(Long channelId, String channelName, LocalDateTime createdTime, String createdBy, LocalDateTime updatedTime, String updatedBy) {
+    public ChannelResponse(Long channelId, String channelName, LocalDateTime createdTime, Long createdBy, LocalDateTime updatedTime, Long updatedBy) {
         this.channelId = channelId;
         this.channelName = channelName;
         this.createdTime = createdTime;
