@@ -31,10 +31,20 @@ public class Program extends BaseEntity {
     private UseYn useYn;
 
     @Builder
-    public Program(Long id, String title, Channel channel) {
+    public Program(Long id, String title, Channel channel, UseYn useYn) {
         this.id = id;
         this.title = title;
         this.channel = channel;
+        this.useYn = useYn;
+    }
+
+    @Builder(builderMethodName = "createBuilder", builderClassName = "createBuilder")
+    public static Program createProgram(String title, Channel channel) {
+        return Program.builder()
+                .title(title)
+                .channel(channel)
+                .useYn(UseYn.Y)
+                .build();
     }
 
     public void modifyProgram(String title, Channel channel) {
