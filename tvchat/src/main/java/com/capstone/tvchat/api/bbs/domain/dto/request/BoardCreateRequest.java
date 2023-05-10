@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BoardCreateRequest {
-    private Long boardId;
     private String boardName;
     private Long programId;
+    private Program program;
     private String imagePath;
     private String description;
 
-    public static Board createBoard(BoardCreateRequest boardCreateRequest, Program program) {
-        return Board.builder()
+    public static Board toEntity(BoardCreateRequest boardCreateRequest) {
+        return Board.createBuilder()
                 .name(boardCreateRequest.getBoardName())
-                .program(program)
+                .program(boardCreateRequest.getProgram())
                 .imagePath(boardCreateRequest.getImagePath())
                 .description(boardCreateRequest.getDescription())
                 .build();

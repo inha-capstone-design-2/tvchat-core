@@ -22,9 +22,8 @@ public class ArticleController {
     @ApiOperation("Article 생성 API")
     @PostMapping("/")
     public ResponseEntity<?> createArticle(@RequestBody CreateArticleRequest createArticleRequest) {
-        articleService.createArticle(createArticleRequest);
         return ResponseHandler.generate()
-                .data(null)
+                .data(articleService.createArticle(createArticleRequest))
                 .status(HttpStatus.CREATED)
                 .build();
     }
