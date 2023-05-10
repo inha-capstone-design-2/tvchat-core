@@ -1,6 +1,5 @@
 package com.capstone.tvchat.api.bbs.domain.entity;
 
-import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.common.domain.BaseEntity;
 import com.capstone.tvchat.common.domain.enums.UseYn;
 import lombok.Builder;
@@ -25,10 +24,6 @@ public class Article extends BaseEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
 
@@ -37,21 +32,19 @@ public class Article extends BaseEntity {
     private UseYn useYn;
 
     @Builder
-    public Article(Long id, String title, String content, Member member, Board board, UseYn useYn) {
+    public Article(Long id, String title, String content,  Board board, UseYn useYn) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.member = member;
         this.board = board;
         this.useYn = useYn;
     }
 
     @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
-    public static Article create(String title, String content, Member member, Board board) {
+    public static Article create(String title, String content, Board board) {
         return Article.builder()
                 .title(title)
                 .content(content)
-                .member(member)
                 .board(board)
                 .useYn(UseYn.Y)
                 .build();

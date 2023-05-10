@@ -9,8 +9,6 @@ import com.capstone.tvchat.api.bbs.domain.enums.ArticleErrorCode;
 import com.capstone.tvchat.api.bbs.domain.enums.BoardErrorCode;
 import com.capstone.tvchat.api.bbs.repository.ArticleRepository;
 import com.capstone.tvchat.api.bbs.repository.BoardRepository;
-import com.capstone.tvchat.api.member.domain.entity.Member;
-import com.capstone.tvchat.api.member.domain.enums.MemberErrorCode;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
@@ -38,15 +36,8 @@ public class ArticleService {
                         .status(HttpStatus.BAD_REQUEST)
                         .build());
 
-        Member member = memberRepository.findById(createArticleRequest.getMemberId())
-                .orElseThrow(() -> ApiException.builder()
-                        .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
-                        .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
-                        .status(HttpStatus.BAD_REQUEST)
-                        .build());
-
         return articleRepository.save(
-                CreateArticleRequest.toEntity(createArticleRequest, member, board)
+                CreateArticleRequest.toEntity(createArticleRequest, board)
         ).getId();
     }
 
