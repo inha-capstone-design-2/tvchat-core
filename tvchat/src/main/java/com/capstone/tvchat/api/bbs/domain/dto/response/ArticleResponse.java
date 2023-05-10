@@ -2,6 +2,7 @@ package com.capstone.tvchat.api.bbs.domain.dto.response;
 
 import com.capstone.tvchat.api.auth.domain.dto.MemberResponseDto.MemberResponseDto;
 import com.capstone.tvchat.api.bbs.domain.entity.Article;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,9 @@ public class ArticleResponse {
     private String content;
     private MemberResponseDto memberResponse;
     private BoardResponse boardResponse;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime updatedTime;
 
     @Builder

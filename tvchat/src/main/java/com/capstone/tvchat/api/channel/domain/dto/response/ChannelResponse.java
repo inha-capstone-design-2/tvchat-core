@@ -1,6 +1,7 @@
 package com.capstone.tvchat.api.channel.domain.dto.response;
 
 import com.capstone.tvchat.api.channel.domain.entity.Channel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,10 @@ import java.time.LocalDateTime;
 public class ChannelResponse {
     private Long channelId;
     private String channelName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
     private Long createdBy;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime updatedTime;
     private Long updatedBy;
 
