@@ -22,10 +22,8 @@ public class BoardController {
     @ApiOperation("게시판 생성 API")
     @PostMapping("/")
     public ResponseEntity<?> createBoard(@RequestBody BoardCreateRequest boardCreateRequest) {
-        Long boardId = boardService.createBoard(boardCreateRequest);
-
         return ResponseHandler.generate()
-                .data(boardId)
+                .data(boardService.createBoard(boardCreateRequest))
                 .status(HttpStatus.CREATED)
                 .build();
     }
