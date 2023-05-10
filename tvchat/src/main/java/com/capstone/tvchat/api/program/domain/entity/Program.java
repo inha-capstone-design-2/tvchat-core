@@ -27,6 +27,7 @@ public class Program extends BaseEntity {
     @JoinColumn(name = "channel_id")
     private Channel channel;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "use_yn")
     private UseYn useYn;
 
