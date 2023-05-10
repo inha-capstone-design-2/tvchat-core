@@ -38,9 +38,8 @@ public class EpisodeController {
     @ApiOperation(value = "회차 생성 API")
     @PostMapping("/")
     public ResponseEntity<?> createEpisode(@RequestBody CreateEpisodeRequest createEpisodeRequest) {
-        episodeService.createEpisode(createEpisodeRequest);
         return ResponseHandler.generate()
-                .data(null)
+                .data(episodeService.createEpisode(createEpisodeRequest))
                 .status(HttpStatus.CREATED)
                 .build();
     }
