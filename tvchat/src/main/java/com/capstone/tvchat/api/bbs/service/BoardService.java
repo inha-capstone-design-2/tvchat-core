@@ -34,8 +34,10 @@ public class BoardService {
                         .errorCode(ProgramErrorCode.PROGRAM_NOT_FOUND.getCode())
                         .build());
 
+        boardCreateRequest.setProgram(program);
+
         return boardRepository.save(
-                BoardCreateRequest.createBoard(boardCreateRequest, program)
+                BoardCreateRequest.toEntity(boardCreateRequest)
         ).getId();
     }
 

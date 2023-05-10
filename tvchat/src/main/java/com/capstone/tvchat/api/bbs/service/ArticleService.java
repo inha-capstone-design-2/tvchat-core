@@ -9,8 +9,11 @@ import com.capstone.tvchat.api.bbs.domain.enums.ArticleErrorCode;
 import com.capstone.tvchat.api.bbs.domain.enums.BoardErrorCode;
 import com.capstone.tvchat.api.bbs.repository.ArticleRepository;
 import com.capstone.tvchat.api.bbs.repository.BoardRepository;
+import com.capstone.tvchat.api.member.domain.enums.MemberErrorCode;
 import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.common.exception.ApiException;
+import com.capstone.tvchat.common.result.ResponseHandler;
+import com.capstone.tvchat.common.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -55,7 +58,24 @@ public class ArticleService {
 
     @Transactional
     public ArticleResponse modifyArticle(Long articleId, ModifyArticleRequest modifyArticleRequest) {
-        return null;
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(ArticleErrorCode.ARTICLE_NOT_FOUND.getMessage())
+                        .errorCode(ArticleErrorCode.ARTICLE_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build());
+
+        if(SecurityUtil.isOwned(article.getMember().getId())) {
+            ResponseHandler.failResultGenerate()
+                    .errorMessage(MemberErrorCode.NO_PERMISSION.getMessage())
+                    .errorCode(MemberErrorCode.NO_PERMISSION.getCode())
+                    .status(HttpStatus.FORBIDDEN)
+                    .build();
+        }
+
+        article.modify(modifyArticleRequest);
+
+        return ArticleResponse.toResponse(article);
     }
 
     public List<ArticleResponse> getArticleByBoard(Long boardId) {

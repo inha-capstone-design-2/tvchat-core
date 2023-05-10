@@ -13,7 +13,7 @@ public class CreateArticleRequest {
     private Long boardId;
 
     public static Article toEntity(CreateArticleRequest createArticleRequest, Board board) {
-        return Article.builder()
+        return Article.createBuilder()
                 .title(createArticleRequest.getTitle())
                 .content(createArticleRequest.getContent())
                 .board(board)
