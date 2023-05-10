@@ -1,5 +1,6 @@
 package com.capstone.tvchat.api.bbs.domain.entity;
 
+import com.capstone.tvchat.api.bbs.domain.dto.request.ModifyArticleRequest;
 import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.common.domain.BaseEntity;
 import com.capstone.tvchat.common.domain.enums.UseYn;
@@ -55,6 +56,11 @@ public class Article extends BaseEntity {
                 .board(board)
                 .useYn(UseYn.Y)
                 .build();
+    }
+
+    public void modify(ModifyArticleRequest modifyArticleRequest) {
+        this.title = modifyArticleRequest.getTitle();
+        this.content = modifyArticleRequest.getContent();
     }
 
     public void delete() {
