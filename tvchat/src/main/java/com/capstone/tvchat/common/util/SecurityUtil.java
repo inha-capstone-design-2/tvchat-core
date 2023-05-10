@@ -30,4 +30,13 @@ public class SecurityUtil {
             return Authority.ROLE_USER;
         } else return Authority.ROLE_ADMIN;
     }
+
+    public static Boolean isOwned(Long memberId) {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (getCurrentMemberId().equals(memberId)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
