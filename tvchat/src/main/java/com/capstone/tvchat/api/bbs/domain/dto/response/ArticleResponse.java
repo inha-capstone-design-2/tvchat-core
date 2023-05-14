@@ -14,7 +14,7 @@ public class ArticleResponse {
     private Long id;
     private String title;
     private String content;
-    private BoardResponse boardResponse;
+    private Long boardId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
     private Long createdBy;
@@ -23,11 +23,11 @@ public class ArticleResponse {
     private Long updatedBy;
 
     @Builder
-    public ArticleResponse(Long id, String title, String content, BoardResponse boardResponse, LocalDateTime createdTime, Long createdBy, LocalDateTime updatedTime, Long updatedBy) {
+    public ArticleResponse(Long id, String title, String content, Long boardId, LocalDateTime createdTime, Long createdBy, LocalDateTime updatedTime, Long updatedBy) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.boardResponse = boardResponse;
+        this.boardId = boardId;
         this.createdTime = createdTime;
         this.createdBy = createdBy;
         this.updatedTime = updatedTime;
@@ -39,7 +39,7 @@ public class ArticleResponse {
                 .id(article.getId())
                 .title(article.getTitle())
                 .content(article.getContent())
-                .boardResponse(BoardResponse.toResponse(article.getBoard()))
+                .boardId(article.getBoard().getId())
                 .createdTime(article.getCreatedDate())
                 .createdBy(article.getCreatedBy())
                 .updatedTime(article.getLastModifiedDate())
