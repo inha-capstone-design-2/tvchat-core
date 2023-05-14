@@ -65,7 +65,7 @@ public class ArticleService {
                         .status(HttpStatus.BAD_REQUEST)
                         .build());
 
-        if(SecurityUtil.isOwned(article.getMember().getId())) {
+        if(SecurityUtil.isOwned(article.getCreatedBy())) {
             ResponseHandler.failResultGenerate()
                     .errorMessage(MemberErrorCode.NO_PERMISSION.getMessage())
                     .errorCode(MemberErrorCode.NO_PERMISSION.getCode())
