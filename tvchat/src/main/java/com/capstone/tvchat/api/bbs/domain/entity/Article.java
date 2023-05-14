@@ -1,7 +1,6 @@
 package com.capstone.tvchat.api.bbs.domain.entity;
 
 import com.capstone.tvchat.api.bbs.domain.dto.request.ModifyArticleRequest;
-import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.common.domain.BaseEntity;
 import com.capstone.tvchat.common.domain.enums.UseYn;
 import lombok.Builder;
@@ -24,10 +23,6 @@ public class Article extends BaseEntity {
 
     @Column(name = "article_content")
     private String content;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")

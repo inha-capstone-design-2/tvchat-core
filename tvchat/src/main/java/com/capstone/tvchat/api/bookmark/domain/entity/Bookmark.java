@@ -1,6 +1,5 @@
 package com.capstone.tvchat.api.bookmark.domain.entity;
 
-import com.capstone.tvchat.api.member.domain.entity.Member;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.common.domain.BaseEntity;
 import com.capstone.tvchat.common.domain.enums.UseYn;
@@ -24,10 +23,6 @@ public class Bookmark extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_id")
     private Program program;
 
@@ -36,17 +31,15 @@ public class Bookmark extends BaseEntity {
     private UseYn useYn;
 
     @Builder
-    public Bookmark(Long id, Member member, Program program, UseYn useYn) {
+    public Bookmark(Long id, Program program, UseYn useYn) {
         this.id = id;
-        this.member = member;
         this.program = program;
         this.useYn = useYn;
     }
 
     @Builder(builderMethodName = "createBuilder", builderClassName = "createBuilder")
-    public static Bookmark create( Member member, Program program) {
+    public static Bookmark create(Program program) {
         return Bookmark.builder()
-                .member(member)
                 .program(program)
                 .useYn(UseYn.Y)
                 .build();
