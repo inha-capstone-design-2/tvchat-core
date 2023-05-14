@@ -46,7 +46,7 @@ jobs:
       ## Docker Build
     - name: Build the Docker image
       uses: actions/checkout@v3
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
       ## 도커 이미지 빌드 후 도커허브에 push하기
     - name: docker push
