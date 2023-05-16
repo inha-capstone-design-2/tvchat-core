@@ -1,18 +1,22 @@
 package com.capstone.tvchat.api.bookmark.service;
 
 import com.capstone.tvchat.api.bookmark.domain.dto.request.CreateBookmarkRequest;
+import com.capstone.tvchat.api.bookmark.domain.dto.response.BookmarkResponse;
 import com.capstone.tvchat.api.bookmark.domain.entity.Bookmark;
+import com.capstone.tvchat.api.bookmark.domain.enums.BookmarkErrorCode;
 import com.capstone.tvchat.api.bookmark.repository.BookmarkRepository;
 import com.capstone.tvchat.api.channel.domain.enums.ChannelErrorCode;
-import com.capstone.tvchat.api.member.domain.entity.Member;
-import com.capstone.tvchat.api.member.domain.enums.MemberErrorCode;
-import com.capstone.tvchat.api.member.repository.MemberRepository;
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.api.program.repository.ProgramRepository;
 import com.capstone.tvchat.common.exception.ApiException;
+import com.capstone.tvchat.common.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,30 +24,40 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookmarkService {
 
     private final BookmarkRepository bookmarkRepository;
-    private final MemberRepository memberRepository;
     private final ProgramRepository programRepository;
 
+    @Transactional
     public Long createBookmark(CreateBookmarkRequest createBookmarkRequest) {
-        Member member = memberRepository.findById(createBookmarkRequest.getMemberId())
-                .orElseThrow(() -> ApiException.builder()
-                        .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
-                        .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
-                        .build());
 
         Program program = programRepository.findById(createBookmarkRequest.getProgramId())
                 .orElseThrow(() -> ApiException.builder()
                         .errorMessage(ChannelErrorCode.CHANNEL_NOT_FOUND.getMessage())
                         .errorCode(ChannelErrorCode.CHANNEL_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
                         .build());
 
         return bookmarkRepository.save(
-                Bookmark.builder()
+                Bookmark.createBuilder()
                         .program(program)
-                        .member(member)
-                        .build()).getId();
+                        .build())
+                .getId();
     }
 
+    @Transactional
     public void deleteBookmark(Long bookmarkId) {
-        bookmarkRepository.deleteById(bookmarkId);
+        Bookmark bookmark = bookmarkRepository.findById(bookmarkId)
+                .orElseThrow(() -> ApiException.builder()
+                        .errorMessage(BookmarkErrorCode.BOOKMARK_NOT_FOUND.getMessage())
+                        .errorCode(BookmarkErrorCode.BOOKMARK_NOT_FOUND.getCode())
+                        .status(HttpStatus.BAD_REQUEST)
+                        .build());
+
+        bookmark.delete();
+    }
+
+    public List<BookmarkResponse> getBookmark() {
+        return bookmarkRepository.findByCreatedBy(SecurityUtil.getCurrentMemberId()).stream()
+                .map(BookmarkResponse::toResponse)
+                .collect(Collectors.toList());
     }
 }

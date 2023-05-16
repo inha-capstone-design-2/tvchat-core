@@ -1,4 +1,4 @@
-package com.capstone.tvchat.api.bbs.domain.entity;
+package com.capstone.tvchat.api.episode.domain.entity;
 
 import com.capstone.tvchat.api.program.domain.entity.Program;
 import com.capstone.tvchat.common.domain.BaseEntity;
@@ -8,63 +8,57 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Table(name = "BOARD")
 @NoArgsConstructor
-public class Board extends BaseEntity {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
+@Table(name = "EPISODE")
+public class Episode extends BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "episode_id")
     private Long id;
-
-    @Column(name = "board_name")
-    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_id")
     private Program program;
 
-    @Column(name = "image_path")
-    private String imagePath;
-
     @Column(name = "description")
     private String description;
+
+    @Column(name = "broadcast_start_time")
+    private LocalDateTime startTime;
+
+    @Column(name = "broadcast_end_time")
+    private LocalDateTime endTime;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "use_yn")
     private UseYn useYn;
 
     @Builder
-    public Board(Long id, String name, Program program, String imagePath, String description, UseYn useYn) {
+    public Episode(Long id, Program program, String description, LocalDateTime startTime, LocalDateTime endTime, UseYn useYn) {
         this.id = id;
-        this.name = name;
         this.program = program;
-        this.imagePath = imagePath;
         this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.useYn = useYn;
     }
 
     @Builder(builderClassName = "createBuilder", builderMethodName = "createBuilder")
-    public static Board create(String name, Program program, String imagePath, String description) {
-        return Board.builder()
-                .name(name)
+    public static Episode create(Program program, String description, LocalDateTime startTime, LocalDateTime endTime) {
+        return Episode.builder()
                 .program(program)
-                .imagePath(imagePath)
                 .description(description)
+                .startTime(startTime)
+                .endTime(endTime)
                 .useYn(UseYn.Y)
                 .build();
     }
 
-    public void modifyBoard(String name, Program program, String imagePath, String description) {
-        this.name = name;
-        this.program = program;
-        this.imagePath = imagePath;
-        this.description = description;
-    }
-
     public void delete() {
-        this.useYn = UseYn.N;
+        this.useYn=UseYn.N;
     }
 }

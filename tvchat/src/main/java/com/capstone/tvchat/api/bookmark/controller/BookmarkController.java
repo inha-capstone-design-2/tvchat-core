@@ -31,11 +31,18 @@ public class BookmarkController {
     @DeleteMapping("/{bookmark-id}")
     public ResponseEntity<?> deleteBookmark(@RequestParam(name = "bookmark-id")Long bookmarkId) {
         bookmarkService.deleteBookmark(bookmarkId);
-
         return ResponseHandler.generate()
                 .data(null)
                 .status(HttpStatus.OK)
                 .build();
     }
 
+    @ApiOperation("Bookmark 조회 API")
+    @GetMapping("/")
+    public ResponseEntity<?> getBookmark() {
+        return ResponseHandler.generate()
+                .data(bookmarkService.getBookmark())
+                .status(HttpStatus.OK)
+                .build();
+    }
 }
