@@ -15,8 +15,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Build With Gradle
-        run: ./gradlew bootJar -x test
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
+        with:
+          arguments: build
       - name: Docker Build And Push
         run: |
           docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
