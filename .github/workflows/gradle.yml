@@ -15,8 +15,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Grant Execute Permission For Gradlew
-        run: chmod +x gradlew
       - name: Build With Gradle
         run: ./gradlew bootJar -x test
       - name: Docker Build And Push
