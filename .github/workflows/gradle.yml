@@ -19,6 +19,9 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
+      - name: find gradlew
+        run: find . -name "gradlew"
+
       - name: Spring - Grant execute permission for gradlew
         run: chmod +x gradlew
 
