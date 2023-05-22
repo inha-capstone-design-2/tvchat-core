@@ -23,6 +23,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Spring - Grant execute permission for gradlew
+          run: cd tvtalk
+
+      - name: Spring - Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Spring-application build
