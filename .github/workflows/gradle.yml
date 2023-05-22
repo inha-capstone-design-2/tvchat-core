@@ -19,6 +19,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      - name: change directory
+        run: cd tvchat-core
+
       - name: Spring - Grant execute permission for gradlew
         run: chmod +x gradlew
 
