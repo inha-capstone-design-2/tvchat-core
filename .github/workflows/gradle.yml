@@ -28,13 +28,10 @@ jobs:
       - name: Spring-application build
         run: ./gradlew build
 
-      - name: make directory
-        run: mkdir Dockerfile
-
       - name: Docker Build And Push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t tvchat-core .
+          docker build -f ./docker/Dockerfile -t tvchat-core .
           docker tag tvchat-core skysrd/tvchat-core
           docker push skysrd/tvchat-core
 
