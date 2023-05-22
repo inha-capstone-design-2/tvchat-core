@@ -28,8 +28,8 @@ jobs:
       - name: Spring-application build
         run: ./gradlew build
 
-      - name: find dockerfile
-        run: find . -name "Dockerfile"
+      - name: check directory
+        run: pwd
 
       - name: Docker Build And Push
         run: |
