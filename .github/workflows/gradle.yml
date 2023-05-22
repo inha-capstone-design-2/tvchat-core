@@ -19,12 +19,6 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: find gradlew
-        run: find / -name "gradlew"
-
       - name: Spring - Grant execute permission for gradlew
         run: chmod +x gradlew
 
