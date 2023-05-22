@@ -19,17 +19,14 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: change directory
-        run: cd tvchat
-
       - name: find gradlew
         run: find . -name "gradlew"
 
       - name: Spring - Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x ./tvchat/gradlew
 
       - name: Spring-application build
-        run: ./gradlew build
+        run: ./tvchat/gradlew build
 
       - name: Docker Build And Push
         run: |
