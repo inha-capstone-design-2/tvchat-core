@@ -19,10 +19,11 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
+      - name: Spring - Grant execute permission for gradlew
+          run: chmod +x gradlew
+
+      - name: Spring-application build
+        run: ./gradlew build
 
       - name: Docker Build And Push
         run: |
