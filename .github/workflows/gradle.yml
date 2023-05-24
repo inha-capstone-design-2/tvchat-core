@@ -21,8 +21,8 @@ jobs:
 
       - name: Spring - Grant execute permission for gradlew
         run: |
-        cd tvchat
-        chmod +x gradlew
+          cd tvchat
+          chmod +x gradlew
 
       - name: Spring-application build
         run: ./gradlew build
