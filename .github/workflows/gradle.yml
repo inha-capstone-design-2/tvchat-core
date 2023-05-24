@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .
+        working-directory: tvchat
     steps:
       - uses: actions/checkout@v3
       - name: Set Up JDK 11
@@ -20,9 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Spring - Grant execute permission for gradlew
-        run: |
-          cd tvchat
-          chmod +x gradlew
+        run: chmod +x gradlew
 
       - name: Spring-application build
         run: ./gradlew build
