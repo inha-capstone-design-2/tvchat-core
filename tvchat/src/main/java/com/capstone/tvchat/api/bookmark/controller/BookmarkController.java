@@ -3,6 +3,7 @@ package com.capstone.tvchat.api.bookmark.controller;
 import com.capstone.tvchat.api.bookmark.domain.dto.request.CreateBookmarkRequest;
 import com.capstone.tvchat.api.bookmark.service.BookmarkService;
 import com.capstone.tvchat.common.result.ResponseHandler;
+import com.capstone.tvchat.common.util.SecurityUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class BookmarkController {
     @ApiOperation("Bookmark 생성 API")
     @PostMapping("/")
     public ResponseEntity<?> createBookmark(@RequestBody CreateBookmarkRequest createBookmarkRequest) {
+        createBookmarkRequest.setMemberId(SecurityUtil.getCurrentMemberId());
         return ResponseHandler.generate()
                 .data(bookmarkService.createBookmark(createBookmarkRequest))
                 .status(HttpStatus.CREATED)
