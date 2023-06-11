@@ -18,6 +18,7 @@ public class ArticleResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdTime;
     private Long createdBy;
+    private String creatorName;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime updatedTime;
     private Long updatedBy;
@@ -45,5 +46,9 @@ public class ArticleResponse {
                 .updatedTime(article.getLastModifiedDate())
                 .updatedBy(article.getUpdatedBy())
                 .build();
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 }
