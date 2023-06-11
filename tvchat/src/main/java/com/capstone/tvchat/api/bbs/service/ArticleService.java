@@ -86,9 +86,23 @@ public class ArticleService {
                         .status(HttpStatus.BAD_REQUEST)
                         .build());
 
-        return articleRepository.findByBoard(board)
+        List<ArticleResponse> articleResponseList =  articleRepository.findByBoard(board)
                 .stream().map(ArticleResponse::toResponse)
                 .collect(Collectors.toList());
+
+        for (ArticleResponse articleResponse:
+             articleResponseList) {
+            articleResponse.setCreatorName(
+                    memberRepository.findById(articleResponse.getCreatedBy())
+                            .orElseThrow(() -> ApiException.builder()
+                                    .errorMessage(MemberErrorCode.MEMBER_NOT_FOUND.getMessage())
+                                    .errorCode(MemberErrorCode.MEMBER_NOT_FOUND.getCode())
+                                    .status(HttpStatus.BAD_REQUEST)
+                                    .build())
+                            .getNickname());
+        }
+
+        return articleResponseList;
     }
 
     public ArticleResponse getArticle(Long articleId) {
